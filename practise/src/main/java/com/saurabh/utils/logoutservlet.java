@@ -2,6 +2,7 @@ package com.saurabh.utils;
 
 import java.io.IOException;
 
+import HibernateSessionFactory.HibernateConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +31,8 @@ public class logoutservlet extends HttpServlet {
 		System.out.println("request.getAttributeNames()= "+request.getAttributeNames());
 		System.out.println("request.getRequestedSessionId()= "+request.getRequestedSessionId());
 		
-		//request.getSession(false).invalidate();
+		request.getSession(false).invalidate();
+		//HibernateConnection.getSessionfactory().close();
 		response.sendRedirect("login.jsp");
 		
 	}

@@ -119,7 +119,7 @@ for(class_subjects csub:subjectclasslist)
 		<td><%=sub1.getId()%></td>
 		<td><%=sub1.getName() %></td>
 		<td><%=sub1.getDomain()%></td><%teacher t1=new teacher();for(class_teachers ct:teacherclasslist){if(ct.getAssigned_class_id().equals(cu.getId())&&ct.getTeaches_subject_id().equals(sub1.getId()))t1=getteacher(ct.getTeacher_id());} %>
-		<td><%=t1.getName()%></td>
+		<td><%if(t1.getName()==null){%><span style="color:red;font-weight:bold;">No Teacher Assigned</span><%}else{%><%=t1.getName()%><%}%></td>
 		</tr>
 		<%
 	}
