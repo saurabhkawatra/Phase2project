@@ -51,7 +51,7 @@
 
 
 
-<h3 style="color:green;"><span style="background-color:yellow;color:black;font-family:'Century Gothic';font-weight:'bold';">List of Students in <span style="color:purple;"><%=cu.getName()%></span></span></h3><br/>
+<h3 style="color:green;"><span style="background-color:yellow;color:black;font-family:'Century Gothic';font-weight:'bold';">List of Students in <span style="color:blue;"><%=cu.getName()%></span></span></h3><br/>
 
 <p style="color:orange;">Total Students in <span style="color:yellow;"><%=cu.getName()%></span> : <%int totalstudents=0;for(class_students cst:studentclasslist){if(cst.getClass_id().equals(cu.getId()))totalstudents++;}%><span style="color:green;font-size:25px;font-weight:bold;"><%=totalstudents%></span></p>
 <table class="table table-dark table-striped">
@@ -95,7 +95,7 @@ for(class_students cstu:studentclasslist)
 
 
 
-<h3 style="color:green;"><span style="background-color:yellow;color:black;font-family:'Century Gothic';font-weight:'bold';">List of Subjects in <span style="color:purple;"><%=cu.getName()%></span></span></h3><br/>
+<h3 style="color:green;"><span style="background-color:yellow;color:black;font-family:'Century Gothic';font-weight:'bold';">List of Subjects in <span style="color:blue;"><%=cu.getName()%></span></span></h3><br/>
 
 <p style="color:orange;">Total Subjects in <span style="color:yellow;"><%=cu.getName()%></span> : <%int totalsubjects=0;for(class_subjects cs:subjectclasslist){if(cs.getClass_id().equals(cu.getId()))totalsubjects++;}%><span style="color:green;font-size:25px;font-weight:bold;"><%=totalsubjects%></span></p>
 <table class="table table-dark table-striped">
@@ -135,7 +135,7 @@ for(class_subjects csub:subjectclasslist)
 
 
 
-<h3 style="color:green;"><span style="background-color:yellow;color:black;font-family:'Century Gothic';font-weight:'bold';">List of Teachers in <span style="color:purple;"><%=cu.getName()%></span></span></h3><br/>
+<h3 style="color:green;"><span style="background-color:yellow;color:black;font-family:'Century Gothic';font-weight:'bold';">List of Teachers in <span style="color:blue;"><%=cu.getName()%></span></span></h3><br/>
 
 <p style="color:orange;">Total Teachers in <span style="color:yellow;"><%=cu.getName()%></span> : <%int totalteachers=0;for(class_teachers ts:teacherclasslist){if(ts.getAssigned_class_id().equals(cu.getId()))totalteachers++;}%><span style="color:green;font-size:25px;font-weight:bold;"><%=totalteachers%></span></p>
 <table class="table table-dark table-striped">
