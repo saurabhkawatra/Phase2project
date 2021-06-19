@@ -31,6 +31,8 @@ import com.saurabh.models.student;
 import com.saurabh.models.subject;
 import com.saurabh.models.teacher;
 
+import HibernateSessionFactory.HibernateConnection;
+
 public class application extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,9 +48,7 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("add_student method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
+		
 
 		student s1 = new student();
 		s1.setName(request.getParameter("student_name"));
@@ -58,7 +58,7 @@ public class application extends HttpServlet {
 		s1.setCity(request.getParameter("student_city"));
 		s1.setPhoneno(request.getParameter("student_phoneno"));
 
-		Session session = factory.openSession();
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		session.save(s1);
@@ -66,7 +66,7 @@ public class application extends HttpServlet {
 		transaction.commit();
 		// session.getTransaction().commit();
 		session.close();
-		factory.close();
+		
 		
 		request.getRequestDispatcher("/dashboard.jsp").include(request, response);
 		
@@ -102,10 +102,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("remove_student method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		session.beginTransaction();
 		String[] removestudents_ids = request.getParameterValues("removestudents");
 		int no = 0;
@@ -121,7 +119,7 @@ public class application extends HttpServlet {
 		System.out.println(no + " Removals done");
 
 		session.close();
-		sessionfactory.close();
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("/dashboard.jsp");
 		System.out.println("request.getRequestURI()= " + request.getRequestURI());
@@ -163,9 +161,7 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("add_teacher method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
+		
 
 		teacher s1 = new teacher();
 		s1.setName(request.getParameter("teacher_name"));
@@ -175,7 +171,7 @@ public class application extends HttpServlet {
 		s1.setCity(request.getParameter("teacher_city"));
 		s1.setPhoneno(request.getParameter("teacher_phoneno"));
 
-		Session session = factory.openSession();
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		session.save(s1);
@@ -183,7 +179,7 @@ public class application extends HttpServlet {
 		transaction.commit();
 		// session.getTransaction().commit();
 		session.close();
-		factory.close();
+		
 
 		out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n"
 				+ "  <strong>Teacher Added!</strong> You should make a note of the Teacher-ID--->" + s1.getId()
@@ -203,10 +199,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("remove_teacher method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		session.beginTransaction();
 		
 		String[] removeteachers_ids = request.getParameterValues("removeteachers");
@@ -228,7 +222,7 @@ public class application extends HttpServlet {
 		session.getTransaction().commit();
 		System.out.println(no + " Removals done");
 		session.close();
-		sessionfactory.close();
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("/dashboard.jsp");
 		System.out.println("request.getRequestURI()= " + request.getRequestURI());
@@ -271,9 +265,7 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("add_subject method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
+		
 
 		subject s1 = new subject();
 		s1.setName(request.getParameter("subject_name"));
@@ -281,7 +273,7 @@ public class application extends HttpServlet {
 		Date d = new Date();
 		s1.setId(String.valueOf(d.getTime()));
 		
-		Session session = factory.openSession();
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		session.save(s1);
@@ -289,7 +281,7 @@ public class application extends HttpServlet {
 		transaction.commit();
 		// session.getTransaction().commit();
 		session.close();
-		factory.close();
+		
 
 		out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n"
 				+ "  <strong>Subject Added!</strong> You should make a note of the Subject-ID--->" + s1.getId()
@@ -309,10 +301,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("remove_subject method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		session.beginTransaction();
 		String[] removesubjects_ids = request.getParameterValues("removesubjects");
 		int no = 0;
@@ -327,7 +317,7 @@ public class application extends HttpServlet {
 		System.out.println(no + " Removals done");
 
 		session.close();
-		sessionfactory.close();
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("/dashboard.jsp");
 		System.out.println("request.getRequestURI()= " + request.getRequestURI());
@@ -368,16 +358,14 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("add_class method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory factory = cfg.buildSessionFactory();
+		
 
 		class_base s1 = new class_base();
 		s1.setName(request.getParameter("class_name"));
 		Date d = new Date();
 		s1.setId(String.valueOf(d.getTime()));
 		
-		Session session = factory.openSession();
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction = session.getTransaction();
 		transaction.begin();
 		session.save(s1);
@@ -385,7 +373,7 @@ public class application extends HttpServlet {
 		transaction.commit();
 		// session.getTransaction().commit();
 		session.close();
-		factory.close();
+		
 
 		out.println("<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">\r\n"
 				+ "  <strong>Class Added!</strong> You should make a note of the Class-ID--->" + s1.getId()
@@ -405,10 +393,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("remove_subject method invoked");
 
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		session.beginTransaction();
 		String[] removeclasses_ids = request.getParameterValues("removeclasses");
 		int no = 0;
@@ -424,7 +410,7 @@ public class application extends HttpServlet {
 		System.out.println(no + " Removals done");
 
 		session.close();
-		sessionfactory.close();
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("/dashboard.jsp");
 		System.out.println("request.getRequestURI()= " + request.getRequestURI());
@@ -462,10 +448,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("assign_students_to_class method invoked");
 		
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		
 		String[] assign_student_ids=request.getParameterValues("assign_students");
@@ -506,7 +490,7 @@ public class application extends HttpServlet {
 		}
 		
 		session.close();
-		sessionfactory.close();
+		
 		
 		out.println("<div class=\"modal-footer\">\r\n"
 				+ "                            <button type=\"button\" class=\"btn btn-secondary\" data-bs-dismiss=\"modal\">OK</button>\r\n"
@@ -523,10 +507,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("assign_students_to_class_1 method invoked");
 		
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		
 		String selectedclassid=request.getParameter("selected_class_for_subjects");
@@ -613,7 +595,7 @@ public class application extends HttpServlet {
 		
 		transaction.commit();
 		session.close();
-		sessionfactory.close();
+		
 		
 		
 	}
@@ -625,10 +607,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("assign_students_to_class_2 method invoked");
 		
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		
 		String[] subjectidsforclass=request.getParameterValues("assign_selected_subjects");
@@ -672,7 +652,7 @@ public class application extends HttpServlet {
 		
 		transaction.commit();
 		session.close();
-		sessionfactory.close();
+		
 		
 	}
 	
@@ -686,10 +666,8 @@ public class application extends HttpServlet {
 		System.out.println("assign_teacher_to_class_1 method invoked");
 		
 		
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		
 		String selectedclassid=request.getParameter("selected_class_for_teacher");
@@ -810,7 +788,7 @@ public class application extends HttpServlet {
 
 		transaction.commit();
 		session.close();
-		sessionfactory.close();
+		
 		
 	}
 	
@@ -822,10 +800,8 @@ public class application extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("assign_teacher_to_class_2 method invoked");
 		
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory = cfg.buildSessionFactory();
-		Session session = sessionfactory.openSession();
+		
+		Session session = HibernateConnection.getSessionfactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		
 		String selectedclassid=(String)request.getSession().getAttribute("classidforteacher");
@@ -863,7 +839,7 @@ public class application extends HttpServlet {
 		
 		transaction.commit();
 		session.close();
-		sessionfactory.close();
+		
 	}
 	
 

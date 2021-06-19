@@ -39,7 +39,7 @@
 		</form>
 	</div>
 
-  <script src="js/login.js"></script>
+  <script src="<%=request.getContextPath()%>/js/login.js"></script>
 
 </body>
 </html>

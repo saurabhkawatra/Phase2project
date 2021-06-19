@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import HibernateSessionFactory.HibernateConnection;
+
 @Entity
 @Table(name="Teacher")
 public class teacher {
@@ -36,13 +38,11 @@ public class teacher {
 	public static List<teacher> getallteachers()
 	{
 		List<teacher> allteacherlist=new ArrayList<>();
-		Configuration cfg=new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory=cfg.buildSessionFactory();
-		Session session=sessionfactory.openSession();
+		
+		Session session=HibernateConnection.getSessionfactory().openSession();
 		allteacherlist=session.createNativeQuery("select * from teacher",teacher.class).getResultList();
 		session.close();
-		sessionfactory.close();
+		
 		return(allteacherlist);
 		
 	}

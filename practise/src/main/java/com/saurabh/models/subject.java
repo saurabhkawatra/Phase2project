@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import HibernateSessionFactory.HibernateConnection;
+
 @Entity
 @Table(name ="Subject")
 public class subject {
@@ -30,13 +32,11 @@ public class subject {
 	public static List<subject> getallsubjects()
 	{
 		List<subject> allsubjectlist=new ArrayList<>();
-		Configuration cfg=new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory=cfg.buildSessionFactory();
-		Session session=sessionfactory.openSession();
+		
+		Session session=HibernateConnection.getSessionfactory().openSession();
 		allsubjectlist=session.createNativeQuery("select * from subject",subject.class).getResultList();
 		session.close();
-		sessionfactory.close();
+		
 		return(allsubjectlist);
 		
 	}

@@ -31,6 +31,8 @@ import org.hibernate.annotations.Type;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
+import HibernateSessionFactory.HibernateConnection;
+
 @Entity
 @Table(name ="Class")
 public class class_base {
@@ -45,13 +47,11 @@ public class class_base {
 	public static List<class_base> getallclasses()
 	{
 		List<class_base> allclasslist=new ArrayList<>();
-		Configuration cfg=new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory=cfg.buildSessionFactory();
-		Session session=sessionfactory.openSession();
+		
+		Session session=HibernateConnection.getSessionfactory().openSession();
 		allclasslist=session.createNativeQuery("select * from class",class_base.class).getResultList();
 		session.close();
-		sessionfactory.close();
+		
 		return(allclasslist);
 		
 	}

@@ -13,6 +13,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import HibernateSessionFactory.HibernateConnection;
+
 @Entity
 public class class_students {
 	
@@ -31,13 +33,11 @@ public class class_students {
 	public static List<class_students> getallclass_students()
 	{
 		List<class_students> allclass_studentslist=new ArrayList<>();
-		Configuration cfg=new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		SessionFactory sessionfactory=cfg.buildSessionFactory();
-		Session session=sessionfactory.openSession();
+		
+		Session session=HibernateConnection.getSessionfactory().openSession();
 		allclass_studentslist=session.createNativeQuery("select * from class_students",class_students.class).getResultList();
 		session.close();
-		sessionfactory.close();
+		
 		return(allclass_studentslist);
 		
 	}
