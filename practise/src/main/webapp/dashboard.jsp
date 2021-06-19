@@ -753,7 +753,7 @@ if (request.getSession(false).getAttribute("username") == null)
 </tr>
 
 <tr>
-<td align="center"><span style="color:aqua;Copperplate Gothic;">Total Classes in the database </span><span style="color:green;font-size:25px;font-weight:bold;"><%=allsubjectlist.size()%></span></td>
+<td align="center"><span style="color:aqua;Copperplate Gothic;">Total Classes in the database </span><span style="color:green;font-size:25px;font-weight:bold;"><%=allclasslist.size()%></span></td>
 <td align="center"><span style="color:aqua;Copperplate Gothic;">Total Students in the database </span><span style="color:green;font-size:25px;font-weight:bold;"><%=allstudentlist.size()%></span></td>        
 <td align="center"><span style="color:aqua;Copperplate Gothic;">Total Subjects in the database </span><span style="color:green;font-size:25px;font-weight:bold;"><%=allsubjectlist.size()%></span></td>
 <td align="center"><span style="color:aqua;Copperplate Gothic;">Total Teachers in the database </span><span style="color:green;font-size:25px;font-weight:bold;"><%=allteacherlist.size()%></span></td>
